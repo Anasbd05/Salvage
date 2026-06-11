@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-header: var(--font-noto);
+  --color-nature: #0a400c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .btn {
+    @apply bg-black text-white py-2 px-4 rounded-lg font-medium tracking-tight;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .btn-primary {
+    @apply bg-transparent text-black;
+  }
+
+  .logo-ticker {
+    @apply h-8 w-auto;
+  }
+
+  .tag {
+    @apply text-sm inline-flex border border-[#222]/10 px-3 py-1 rounded-lg tracking-tight;
+  }
+
+  .section-title {
+    @apply text-center text-3xl md:text-[54px] md:leading-[60px] font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] bg-clip-text text-transparent;
+  }
+
+  .section-desc {
+    @apply text-center text-[#010D3E] tracking-tight text-[22px] leading-[30px];
+  }
+
+  .section-heading {
+    @apply max-w-[640px] mx-auto;
+  }
+
+  .card {
+    @apply p-10 border border-[#222222]/10 rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full;
+  }
 }
