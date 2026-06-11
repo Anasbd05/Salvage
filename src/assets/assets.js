@@ -24,3 +24,26 @@ export const reviews = [
       "Une excellente expérience du début à la fin. Les designers étaient sympathiques, patients et pleins d'idées fraîches. Ils ont complètement transformé ma chambre en un espace paisible et élégant. C'est maintenant ma pièce préférée de la maison !",
   },
 ];
+
+export const services = [
+  {
+    icon: "🚿",
+    label: "Lavage exterior",
+    price: 120,
+  },
+  {
+    icon: "🛋️",
+    label: "Lavage interior",
+    price: 150,
+  },
+  {
+    icon: "✨",
+    label: "Lavage complet",
+    price: 250,
+  },
+  {
+    icon: "💎",
+    label: "Premium detailing",
+    price: 400,
+  },
+];
