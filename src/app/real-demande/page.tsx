@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { carBrands, services, vehiculeCategories } from "@/assets/assets";
@@ -17,7 +18,19 @@ import {
 } from "@/components/ui/select";
 
 const page = () => {
-  const [selected, setSelected] = useState("");
+  const [FullName, setFullName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Ville, setVille] = useState("");
+  const [Address, setAdress] = useState("");
+  const [PhoneNumber, setPhoneNumber] = useState("");
+  const [Service, setService] = useState("");
+  const [Category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
+  const [Year, setYear] = useState("");
+  const [Date, setDate] = useState("");
+  const [Heure, setHeure] = useState("");
+
   const TIME_SLOTS = [
     "08:00",
     "09:00",
@@ -29,6 +42,8 @@ const page = () => {
     "16:00",
     "17:00",
   ];
+
+  console.log(Category);
 
   return (
     <section className="min-h-screen bg-linear-to-br from-sky-50 pb-14 to-white ">
@@ -65,20 +80,34 @@ const page = () => {
                 <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
                   Nom complet
                 </FieldLabel>
-                <Input placeholder="Prénom et nom" required />
+                <Input
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="Prénom et nom"
+                  required
+                />
               </Field>
               <div className=" flex flex-row gap-4 ">
                 <Field>
                   <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
                     Téléphone
                   </FieldLabel>
-                  <Input type="tel" placeholder="06XX XXX XXX" required />
+                  <Input
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    type="tel"
+                    placeholder="06XX XXX XXX"
+                    required
+                  />
                 </Field>
                 <Field>
                   <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
                     E-mail
                   </FieldLabel>
-                  <Input type="email" placeholder="votre@email.com" required />
+                  <Input
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="email"
+                    placeholder="votre@email.com"
+                    required
+                  />
                 </Field>
               </div>
             </div>
@@ -105,6 +134,7 @@ const page = () => {
                   Ville
                 </FieldLabel>
                 <Input
+                  onChange={(e) => setVille(e.target.value)}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
                   type="text"
                   placeholder="Ex : Casablanca, Rabat..."
@@ -116,6 +146,7 @@ const page = () => {
                   Adresse complète
                 </FieldLabel>
                 <Input
+                  onChange={(e) => setAdress(e.target.value)}
                   type="text"
                   placeholder="Rue, numéro, résidence..."
                   required
@@ -155,7 +186,7 @@ const page = () => {
                 <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
                   Category
                 </FieldLabel>
-                <Select>
+                <Select onValueChange={(value) => setCategory(value)}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
@@ -175,7 +206,7 @@ const page = () => {
                 <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
                   Brand
                 </FieldLabel>
-                <Select>
+                <Select onValueChange={(value) => setBrand(value)}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select a brand" />
                   </SelectTrigger>
@@ -189,20 +220,31 @@ const page = () => {
                       ))}
                     </SelectGroup>
                   </SelectContent>
-                </Select>{" "}
+                </Select>
               </Field>
               <div className=" flex flex-row gap-4 ">
                 <Field>
-                  <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
+                  <FieldLabel className="-mb-2 text-sm font-medium text-gray-600">
                     Model
                   </FieldLabel>
-                  <Input type="tel" placeholder="A5" required />
+
+                  <Input
+                    onChange={(e) => setModel(e.target.value)}
+                    type="text"
+                    placeholder="A5"
+                    required
+                  />
                 </Field>
                 <Field>
                   <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
                     year
                   </FieldLabel>
-                  <Input type="numeric" placeholder="2026" required />
+                  <Input
+                    onChange={(e) => setYear(e.target.value)}
+                    type="numeric"
+                    placeholder="2026"
+                    required
+                  />
                 </Field>
               </div>
             </div>
@@ -226,10 +268,10 @@ const page = () => {
             <div className=" grid grid-cols-2 gap-4 w-full ">
               {services.map((service, index) => (
                 <div
-                  onClick={() => setSelected(service.label)}
+                  onClick={() => setService(service.label)}
                   key={index}
                   className={`relative flex flex-col items-start gap-1 p-4 rounded-xl border-2 transition-all cursor-pointer text-left w-full ${
-                    selected === service.label
+                    Service === service.label
                       ? "border-sky-500 bg-sky-50 shadow-sm"
                       : "border-gray-200 bg-white hover:border-sky-300 hover:bg-sky-50/40"
                   }`}
@@ -267,6 +309,7 @@ const page = () => {
                   Date souhaitée
                 </label>
                 <input
+                  onChange={(e) => setDate(e.target.value)}
                   type="date"
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
                 />
@@ -278,9 +321,12 @@ const page = () => {
                 <div className="grid grid-cols-3 gap-2">
                   {TIME_SLOTS.map((slot) => (
                     <button
+                      onClick={() => setHeure(slot)}
                       key={slot}
                       type="button"
-                      className={`py-2 rounded-lg text-sm font-medium border transition-all `}
+                      className={`py-2 rounded-lg text-sm font-medium border transition-all ${
+                        slot === Heure && "border-sky-500 bg-sky-50 shadow-sm"
+                      } `}
                     >
                       {slot}
                     </button>
@@ -290,6 +336,7 @@ const page = () => {
             </div>
           </div>
         </main>
+
         <div className="w-[45%] lg:sticky lg:top-24">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
             <h2 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
@@ -299,7 +346,7 @@ const page = () => {
               <div className="flex justify-between items-start gap-2">
                 <span className="text-sm text-gray-400 shrink-0">Service</span>
                 <span className="text-xs font-medium text-gray-700 text-right">
-                  Lavage extérieur
+                  {Service}
                 </span>
               </div>
               <div className="flex justify-between items-start gap-2">
@@ -307,19 +354,19 @@ const page = () => {
                   Véhicule Category
                 </span>
                 <span className="text-xs font-medium text-gray-700 text-right">
-                  4X4
+                  {Category}
                 </span>
               </div>
               <div className="flex justify-between items-start gap-2">
                 <span className="text-sm text-gray-400 shrink-0">Date</span>
                 <span className="text-xs font-medium text-gray-700 text-right">
-                  18-06-2025
+                  {Date}
                 </span>
               </div>
               <div className="flex justify-between items-start gap-2">
                 <span className="text-sm text-gray-400 shrink-0">Heure</span>
                 <span className="text-xs font-medium text-gray-700 text-right">
-                  11:00
+                  {Heure}
                 </span>
               </div>
             </div>
