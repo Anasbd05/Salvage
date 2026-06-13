@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { carBrands, services, vehiculeCategories } from "@/assets/assets";
@@ -16,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { createClient } from "@/utils/supabase/client";
 
 const page = () => {
   const [FullName, setFullName] = useState("");
@@ -30,6 +30,7 @@ const page = () => {
   const [Year, setYear] = useState("");
   const [Date, setDate] = useState("");
   const [Heure, setHeure] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const TIME_SLOTS = [
     "08:00",
@@ -43,10 +44,52 @@ const page = () => {
     "17:00",
   ];
 
-  console.log(Category);
+  const supabase = createClient();
+  const handleSubmit = async () => {
+    const newErrors: Record<string, string> = {};
+    if (!FullName.trim()) newErrors.fullName = "Nom complet requis";
+    if (!PhoneNumber.trim()) newErrors.phoneNumber = "Téléphone requis";
+    if (!Email.trim()) newErrors.email = "Email requis";
+    if (!Ville.trim()) newErrors.ville = "Ville requise";
+    if (!Address.trim()) newErrors.address = "Adresse requise";
+    if (!Category) newErrors.category = "Choisissez une catégorie";
+    if (!brand) newErrors.brand = "Choisissez une marque";
+    if (!model.trim()) newErrors.model = "Modèle requis";
+    if (!Year.trim()) newErrors.year = "Année requise";
+    if (!Service) newErrors.service = "Choisissez un service";
+    if (!Date) newErrors.date = "Choisissez une date";
+    if (!Heure) newErrors.heure = "Choisissez une heure";
 
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+
+    try {
+      const { error } = await supabase.from("Salvage").insert({
+        full_name: FullName,
+        email: Email,
+        phone_number: PhoneNumber,
+        ville: Ville,
+        address: Address,
+        category: Category,
+        brand,
+        service: Service,
+        date: Date,
+        heure: Heure,
+      });
+
+      if (error) throw error;
+      alert("Réservation effectuée avec succès ✅");
+    } catch (error) {
+      console.log("ERROR:", error);
+      alert("Une erreur est survenue ❌");
+    }
+  };
   return (
-    <section className="min-h-screen bg-linear-to-br from-sky-50 pb-14 to-white ">
+    <section className=" relative min-h-screen bg-linear-to-br from-sky-50 pb-14 to-white ">
       <div className=" flex flex-row w-full justify-between px-10 py-10 ">
         <Link
           href="/"
@@ -85,6 +128,9 @@ const page = () => {
                   placeholder="Prénom et nom"
                   required
                 />
+                {errors.fullName && (
+                  <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>
+                )}
               </Field>
               <div className=" flex flex-row gap-4 ">
                 <Field>
@@ -97,6 +143,11 @@ const page = () => {
                     placeholder="06XX XXX XXX"
                     required
                   />
+                  {errors.phoneNumber && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.phoneNumber}
+                    </p>
+                  )}
                 </Field>
                 <Field>
                   <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
@@ -108,6 +159,9 @@ const page = () => {
                     placeholder="votre@email.com"
                     required
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                  )}
                 </Field>
               </div>
             </div>
@@ -140,6 +194,9 @@ const page = () => {
                   placeholder="Ex : Casablanca, Rabat..."
                   required
                 />
+                {errors.ville && (
+                  <p className="text-red-500 text-xs mt-1">{errors.ville}</p>
+                )}
               </Field>
               <Field>
                 <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
@@ -151,6 +208,9 @@ const page = () => {
                   placeholder="Rue, numéro, résidence..."
                   required
                 />
+                {errors.address && (
+                  <p className="text-red-500 text-xs mt-1">{errors.address}</p>
+                )}
               </Field>
               <Field>
                 <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
@@ -201,6 +261,9 @@ const page = () => {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
+                {errors.category && (
+                  <p className="text-red-500 text-xs mt-1">{errors.category}</p>
+                )}
               </Field>
               <Field>
                 <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
@@ -221,6 +284,9 @@ const page = () => {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
+                {errors.brand && (
+                  <p className="text-red-500 text-xs mt-1">{errors.brand}</p>
+                )}
               </Field>
               <div className=" flex flex-row gap-4 ">
                 <Field>
@@ -229,22 +295,32 @@ const page = () => {
                   </FieldLabel>
 
                   <Input
+                    value={model}
                     onChange={(e) => setModel(e.target.value)}
+                    className={errors.model ? "border-red-500" : ""}
                     type="text"
                     placeholder="A5"
-                    required
                   />
+
+                  {errors.model && (
+                    <p className="text-red-500 text-xs mt-1">{errors.model}</p>
+                  )}
                 </Field>
                 <Field>
                   <FieldLabel className=" -mb-2 text-sm font-medium text-gray-600">
                     year
                   </FieldLabel>
                   <Input
+                    value={Year}
                     onChange={(e) => setYear(e.target.value)}
-                    type="numeric"
+                    className={errors.year ? "border-red-500" : ""}
+                    type="number"
                     placeholder="2026"
-                    required
                   />
+
+                  {errors.year && (
+                    <p className="text-red-500 text-xs mt-1">{errors.year}</p>
+                  )}
                 </Field>
               </div>
             </div>
@@ -286,6 +362,9 @@ const page = () => {
                 </div>
               ))}
             </div>
+            {errors.service && (
+              <p className="text-red-500 text-sm mt-2">{errors.service}</p>
+            )}
           </div>
 
           {/* Date */}
@@ -313,6 +392,9 @@ const page = () => {
                   type="date"
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white"
                 />
+                {errors.date && (
+                  <p className="text-red-500 text-xs mt-1">{errors.date}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-600 mb-1">
@@ -332,6 +414,9 @@ const page = () => {
                     </button>
                   ))}
                 </div>
+                {errors.heure && (
+                  <p className="text-red-500 text-xs mt-2">{errors.heure}</p>
+                )}
               </div>
             </div>
           </div>
@@ -384,6 +469,7 @@ const page = () => {
             </div>
 
             <button
+              onClick={handleSubmit}
               type="submit"
               className="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition-all text-base shadow-lg shadow-sky-200 flex items-center justify-center gap-2"
             >
@@ -396,6 +482,8 @@ const page = () => {
           </div>
         </div>
       </main>
+
+      {/* Submit successful */}
     </section>
   );
 };
