@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { createClient } from "@/utils/supabase/client";
+import { Check, X } from "lucide-react";
 
 const page = () => {
   const [FullName, setFullName] = useState("");
@@ -80,14 +81,16 @@ const page = () => {
         date: Date,
         heure: Heure,
       });
-
+      setClose(false);
       if (error) throw error;
-      alert("Réservation effectuée avec succès ✅");
     } catch (error) {
       console.log("ERROR:", error);
       alert("Une erreur est survenue ❌");
     }
   };
+
+  const [close, setClose] = useState(true);
+
   return (
     <section className=" relative min-h-screen bg-linear-to-br from-sky-50 py-10 to-white ">
       <div className=" flex flex-row w-full justify-between px-10 ">
@@ -484,57 +487,40 @@ const page = () => {
       </main>
 
       {/* Submit successful */}
-
-      {/* Submit successful */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-        <div className="relative bg-white rounded-2xl shadow-xl border border-gray-100 p-8 w-full max-w-md mx-4 text-center">
+      <div
+        className={` fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm ${
+          close === true ? " hidden " : "fixed "
+        } `}
+      >
+        <div className="relative bg-white rounded-2xl shadow-xl border border-gray-100 p-8 w-full max-w-lg mx-4 text-center">
           {/* Close button */}
-          <button className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
+          <button
+            onClick={() => setClose(true)}
+            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition"
+          >
+            <X className="w-5 h-5 cursor-pointer " />
           </button>
 
           {/* Icon */}
-          <div className="mx-auto mb-5 w-16 h-16 rounded-full bg-sky-50 flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-8 h-8 text-sky-500"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M20 6L9 17l-5-5" />
-            </svg>
+          <div className="mx-auto mt-5 mb-5 w-20 h-20 rounded-full bg-sky-100 flex items-center justify-center">
+            <div className="  w-13 h-13 flex items-center justify-center bg-sky-200 rounded-xl  ">
+              <Check className="w-8 h-8 text-sky-600" />
+            </div>
           </div>
 
           {/* Title */}
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Merci de nous avoir choisis ! 🎉
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+            Merci de nous avoir <br className=" lg:flex hidden " />
+            <span className="text-emerald-500">Choisis!</span>
           </h2>
 
-          {/* Description */}
           <p className="text-gray-400 text-sm leading-relaxed mb-6">
-            Votre réservation a bien été reçue. Notre équipe vous contactera
-            très prochainement pour confirmer votre créneau et organiser votre
-            lavage à domicile.
+            Votre demande a été reçue. Nous vous contacterons par e-mail pour
+            confirmer ou refuser votre réservation.
           </p>
 
           {/* Divider */}
-          <div className="border-t border-dashed border-gray-100 mb-6" />
+          <div className="border-t border-dashed border-gray-200 mb-6" />
 
           {/* Details summary */}
           <div className="flex flex-col gap-2 text-sm mb-6">
@@ -553,11 +539,6 @@ const page = () => {
               <span className="font-medium text-gray-700">{Heure || "—"}</span>
             </div>
           </div>
-
-          {/* CTA */}
-          <button className="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 text-white font-bold py-3 rounded-xl transition-all text-sm shadow-md shadow-sky-100">
-            Retour à l&apos;accueil
-          </button>
         </div>
       </div>
     </section>

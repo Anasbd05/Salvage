@@ -43,9 +43,21 @@ const page = () => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Status</SelectLabel>
-                    <SelectItem value="Complete">Complete</SelectItem>
-                    <SelectItem value="Pending">Pending</SelectItem>
-                    <SelectItem value="Canceled">Canceled</SelectItem>
+                    <SelectItem
+                      className=" focus:bg-green-300 "
+                      value="Complete"
+                    >
+                      Complete
+                    </SelectItem>
+                    <SelectItem
+                      className=" focus:bg-orange-300 "
+                      value="Pending"
+                    >
+                      Pending
+                    </SelectItem>
+                    <SelectItem className=" focus:bg-red-300 " value="Canceled">
+                      Canceled
+                    </SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
