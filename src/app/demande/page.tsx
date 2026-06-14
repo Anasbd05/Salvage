@@ -16,8 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { createClient } from "@/utils/supabase/client";
-import { Check, X } from "lucide-react";
-
+import { Check, LoaderCircle, X } from "lucide-react";
 const page = () => {
   const [FullName, setFullName] = useState("");
   const [Email, setEmail] = useState("");
@@ -31,6 +30,7 @@ const page = () => {
   const [Year, setYear] = useState("");
   const [Date, setDate] = useState("");
   const [Heure, setHeure] = useState("");
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const TIME_SLOTS = [
@@ -67,6 +67,7 @@ const page = () => {
     }
 
     setErrors({});
+    setLoading(true);
 
     try {
       const { error } = await supabase.from("Salvage").insert({
@@ -86,6 +87,8 @@ const page = () => {
     } catch (error) {
       console.log("ERROR:", error);
       alert("Une erreur est survenue ❌");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -473,10 +476,18 @@ const page = () => {
 
             <button
               onClick={handleSubmit}
-              type="submit"
-              className="w-full bg-sky-500 hover:bg-sky-600 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition-all text-base shadow-lg shadow-sky-200 flex items-center justify-center gap-2"
+              type="button"
+              disabled={loading}
+              className="w-full bg-sky-500 hover:bg-sky-600 disabled:bg-sky-400 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition-all text-base shadow-lg shadow-sky-200 flex items-center justify-center gap-2"
             >
-              🚗 Réserver maintenant
+              {loading ? (
+                <>
+                  <LoaderCircle className="w-5 h-5 animate-spin" />
+                  Envoi en cours...
+                </>
+              ) : (
+                <>🚗 Réserver maintenant</>
+              )}
             </button>
 
             <p className="text-xs text-center text-gray-400 mt-3">
@@ -509,7 +520,7 @@ const page = () => {
           </div>
 
           {/* Title */}
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl leading-relaxed font-bold text-gray-800 mb-4">
             Merci de nous avoir <br className=" lg:flex hidden " />
             <span className="text-emerald-500">Choisis!</span>
           </h2>
