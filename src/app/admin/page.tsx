@@ -19,11 +19,12 @@ interface Order {
   address: string;
   date: string;
   heure: string;
+  status: string;
 }
 
 const page = () => {
   const [Orders, setOrders] = useState<Order[]>([]);
-
+  const [loading, setLoading] = useState(false);
   const supabase = createClient();
 
   const FetchOrders = async () => {
@@ -37,6 +38,18 @@ const page = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleStatusUpdate = async (id: number, status: string) => {
+    setLoading(true);
+    const { error } = await supabase
+      .from("Salvage")
+      .update({ status })
+      .eq("id", id);
+
+    FetchOrders();
+
+    console.log("error:", error);
   };
   useEffect(() => {
     FetchOrders();
@@ -163,14 +176,63 @@ const page = () => {
                         {order.service}
                       </p>
                     </div>
-                    {/* confirm / reject */}
-                    <div className=" flex flex-row w-full mt-4 mb-2 gap-6 ">
-                      <button className=" hover:opacity-80 cursor-pointer w-2/4 bg-green-100 rounded-md py-2 text-green-700 font-medium   ">
-                        Confirm
-                      </button>
-                      <button className=" hover:opacity-80 cursor-pointer w-2/4 bg-red-100  rounded-md py-2 text-red-600  font-medium  ">
-                        Reject
-                      </button>
+                    <div className="mt-4 mb-2">
+                      {order.status === "Pending" && (
+                        <div className="flex items-center justify-between gap-4">
+                          <span className=" animate-pulse bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-sm font-medium">
+                            Pending
+                          </span>
+
+                          <button
+                            onClick={() =>
+                              handleStatusUpdate(order.id, "Complete")
+                            }
+                            className="bg-green-100 text-green-700 px-4 py-2 rounded-md font-medium hover:bg-green-200 transition"
+                          >
+                            Mark Complete
+                          </button>
+                        </div>
+                      )}
+
+                      {order.status === "Complete" && (
+                        <div className="flex items-center justify-between">
+                          <span className=" animate-pulse bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">
+                            Completed
+                          </span>
+                        </div>
+                      )}
+
+                      {order.status === "Rejected" && (
+                        <div className="flex items-center justify-between">
+                          <span className=" animate-pulse bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
+                            Rejected
+                          </span>
+                        </div>
+                      )}
+
+                      {!["Pending", "Complete", "Rejected"].includes(
+                        order.status
+                      ) && (
+                        <div className="flex gap-4">
+                          <button
+                            onClick={() =>
+                              handleStatusUpdate(order.id, "Pending")
+                            }
+                            className="flex-1 bg-green-100 text-green-700 py-2 rounded-md font-medium hover:bg-green-200 transition"
+                          >
+                            Confirm
+                          </button>
+
+                          <button
+                            onClick={() =>
+                              handleStatusUpdate(order.id, "Rejected")
+                            }
+                            className="flex-1 bg-red-100 text-red-600 py-2 rounded-md font-medium hover:bg-red-200 transition"
+                          >
+                            Reject
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </main>
                 ) : (
