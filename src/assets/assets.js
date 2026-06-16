@@ -100,3 +100,108 @@ export const carBrands = [
   { label: "Chevrolet", name: "Chevrolet" },
   { label: "Isuzu", name: "Isuzu" },
 ];
+
+export const faqs = [
+  {
+    question: "Combien de temps dure un lavage à domicile ?",
+    answer:
+      "La durée dépend du service choisi et de l’état du véhicule. En général, un lavage prend entre 45 minutes et 2 heures.",
+  },
+  {
+    question: "Dois-je fournir de l’eau ou de l’électricité ?",
+    answer:
+      "Non, notre équipe est équipée du matériel nécessaire pour réaliser le lavage dans les meilleures conditions.",
+  },
+  {
+    question: "Comment puis-je réserver un lavage ?",
+    answer:
+      "Il suffit de remplir le formulaire de réservation en indiquant vos informations, votre véhicule et le créneau souhaité.",
+  },
+  {
+    question: "Comment vais-je savoir si ma réservation est acceptée ?",
+    answer:
+      "Après réception de votre demande, nous vous contacterons par e-mail pour confirmer ou refuser votre réservation.",
+  },
+  {
+    question: "Puis-je modifier ou annuler ma réservation ?",
+    answer:
+      "Oui, vous pouvez nous contacter avant la date prévue afin de modifier ou annuler votre réservation.",
+  },
+  {
+    question: "Quels types de véhicules acceptez-vous ?",
+    answer:
+      "Nous intervenons sur la plupart des véhicules : citadines, berlines, SUV, utilitaires, pick-up et véhicules de luxe.",
+  },
+  {
+    question: "Quels moyens de paiement acceptez-vous ?",
+    answer:
+      "Nous acceptons actuellement le paiement en espèces ainsi que d’autres moyens de paiement selon disponibilité.",
+  },
+  {
+    question: "Intervenez-vous dans toutes les villes ?",
+    answer:
+      "Notre zone d’intervention dépend de la disponibilité de nos équipes. Indiquez votre ville lors de la réservation pour vérifier l’éligibilité.",
+  },
+];
+
+import { Target, Bookmark, Library, ScrollText, Sparkles } from "lucide-react";
+
+export const features = [
+  {
+    icon: Target,
+    title: "Lavage à domicile",
+    description:
+      "Profitez d’un lavage professionnel directement chez vous, sans avoir à vous déplacer.",
+  },
+  {
+    icon: Library,
+    title: "Produits de qualité",
+    description:
+      "Nous utilisons des produits performants et adaptés pour protéger votre véhicule et préserver sa brillance.",
+  },
+  {
+    icon: Sparkles,
+    title: "Nettoyage intérieur",
+    description:
+      "Aspiration, nettoyage des surfaces et finition soignée pour un habitacle propre et agréable.",
+  },
+  {
+    icon: ScrollText,
+    title: "Nettoyage extérieur",
+    description:
+      "Un lavage complet de la carrosserie, des vitres et des jantes pour un résultat impeccable.",
+  },
+  {
+    icon: Bookmark,
+    title: "Réservation facile",
+    description:
+      "Choisissez votre véhicule, votre service et votre créneau en quelques clics seulement.",
+  },
+  {
+    icon: Target,
+    title: "Satisfaction garantie",
+    description:
+      "Notre priorité est de vous offrir un service fiable, rapide et à la hauteur de vos attentes.",
+  },
+];
+
+export const howWorks = [
+  {
+    id: "01",
+    title: "Réservez en ligne",
+    description:
+      "Choisissez votre véhicule, le service souhaité ainsi que la date et l’heure qui vous conviennent. La réservation ne prend que quelques minutes.",
+  },
+  {
+    id: "02",
+    title: "Confirmation",
+    description:
+      "Notre équipe examine votre demande et vous contacte rapidement par e-mail pour confirmer ou refuser votre réservation selon les disponibilités.",
+  },
+  {
+    id: "03",
+    title: "Lavage à domicile",
+    description:
+      "Une fois la réservation confirmée, nous nous déplaçons directement chez vous pour réaliser un lavage complet, professionnel et soigné de votre véhicule.",
+  },
+];

@@ -4,25 +4,31 @@ import hero from "@/assets/hero.png";
 
 const Home = () => {
   return (
-    <main className="flex justify-between w-full items-center gap-10 h-127.5 px-20">
-      <div className="flex flex-col w-2/4 gap-8">
-        <h2 className="text-5xl font-bold text-black">
-          Professional Cleaning, <br /> Right at Your Doorstep
+    <main className="flex flex-col lg:flex-row justify-between w-full items-center gap-10 lg:h-127.5 px-8 py-14 lg:px-20">
+      <div className="flex flex-col lg:w-2/4 gap-6">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight lg:leading-15">
+          Redonnez de l’éclat à votre{" "}
+          <span className="bg-linear-to-r from-sky-500 to-blue-700 bg-clip-text text-transparent">
+            véhicule
+          </span>
         </h2>
 
-        <p className="text-gray-900 leading-relaxed">
-          Enjoy a spotless vehicle without leaving your home. Our mobile
-          cleaning service provides high-quality car washing and detailing,
-          saving you time while delivering exceptional results.
+        <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+          Profitez d’un service de lavage automobile professionnel directement
+          chez vous. Rapide, pratique et efficace, nous prenons soin de votre
+          véhicule pendant que vous profitez de votre temps libre.
         </p>
 
-        <div className="flex gap-5">
-          <button className="py-2.5 px-7 rounded-lg bg-blue-500 hover:opacity-80 cursor-pointer text-white">
-            Book a Service
+        <div className="flex gap-4 pt-2">
+          <button className="group flex items-center gap-2 px-8 py-4 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-semibold shadow-lg shadow-sky-200 transition-all duration-300">
+            Réserver maintenant
+            <span className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
           </button>
         </div>
       </div>
-      <div className="w-2/5">
+      <div className="  w-full lg:w-2/5">
         <Image
           alt=""
           className="h-115  w-full rounded-xl "

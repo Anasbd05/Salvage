@@ -49,7 +49,7 @@ const Navbar = () => {
             height={70}
             className=" rounded-full -mr-2 "
           />
-          <span className="font-bold text-xl font-header text-nature ">
+          <span className="font-bold text-xl font-header text-accent ">
             SALVAGE
           </span>
         </main>
@@ -58,7 +58,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-12">
           <Link
             href={"/#contact"}
-            className=" py-2 px-5 bg-nature text-white hover:opacity-80 cursor-pointer rounded-md "
+            className=" py-2 px-5 bg-accent text-white hover:opacity-80 cursor-pointer rounded-md "
           >
             Demande
           </Link>

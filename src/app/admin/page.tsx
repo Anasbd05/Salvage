@@ -48,141 +48,203 @@ const page = () => {
       .eq("id", id);
 
     FetchOrders();
-
+    setLoading(false);
     console.log("error:", error);
   };
+
   useEffect(() => {
     FetchOrders();
   }, []);
 
-  const [viewDetails, setViewDetails] = useState(false);
+  // Track which card is open by order ID (null = none open)
+  const [viewDetails, setViewDetails] = useState<number | null>(null);
 
   const [filter, setFilter] = useState("All");
+  const [search, setSearch] = useState("");
 
   return (
-    <section className="min-h-screen  py-10 bg-white ">
-      <main className="px-8 w-full ">
-        <div>
-          <h2 className="font-bold text-3xl text-gray-900 mb-1.5 flex items-center">
-            Demands list
-          </h2>
-          <p className="text-gray-400 font-medium ">
-            Here you can find all of your demands
-          </p>
+    <section className="min-h-screen py-10 px-6 bg-white">
+      <main className="px-8 w-full">
+        {/* header */}
+        <div className="flex items-center mb-3 gap-2">
+          <span className="w-2 h-2 animate-pulse rounded-full bg-sky-500 inline-block" />
+          <span className=" text-sm font-semibold tracking-wide text-neutral-700 uppercase ">
+            Demands
+          </span>
         </div>
-        {/* table */}
+        <main className=" w-full flex justify-between items-center ">
+          <div>
+            <h2 className="font-medium text-2xl tracking-wider mb-1 text-gray-900 flex items-center">
+              All Requets
+            </h2>
+            <p className="text-slate-500 font-medium text-sm">
+              Here you can find all of your demands
+            </p>
+          </div>
+          <div className=" flex gap-5">
+            <div className=" bg-gray-50 border-2 border-sky-200 flex flex-col items-end gap-1 rounded-lg py-2 px-6 ">
+              <span className="text-gray-600 font-medium text-sm tracking-wide   ">
+                Pending
+              </span>
+              <span className="text-xl font-semibold text-amber-500">
+                {Orders.filter((item) => item.status === "Pending").length}
+              </span>
+            </div>
+            <div className=" bg-gray-50 border-2 border-sky-200 flex flex-col items-end gap-1 rounded-lg py-2 px-6 ">
+              <span className="text-gray-600 font-medium text-sm tracking-wide   ">
+                Completed
+              </span>
+              <span className="text-xl font-semibold text-emerald-500">
+                {Orders.filter((item) => item.status === "Complete").length}
+              </span>
+            </div>
+            <div className=" bg-gray-50 border-2 border-sky-200 flex flex-col items-end gap-1 rounded-lg py-2 px-6 ">
+              <span className="text-gray-600 font-medium text-sm tracking-wide   ">
+                Rejected
+              </span>
+              <span className="text-xl font-semibold text-red-500">
+                {Orders.filter((item) => item.status === "Rejected").length}
+              </span>
+            </div>
+          </div>
+        </main>
 
-        <main className=" mt-8 rounded-md shadow-sm border-2 border-input bg-white p-10">
-          <div className=" flex flex-row justify-between w-full">
-            <div className=" shadow-sm py-1.5 gap-2.5.5 rounded-md flex items-center w-2/5 pr-2 pl-2.5 border border-input bg-transparent text-black text-sm ">
-              <Search className="w-5 h-5  text-gray-400 " />
+        {/* table */}
+        <section className="rounded-2xl border border-slate-200 bg-white pb-8 px-8 mt-10 shadow-sm overflow-hidden">
+          <div className="flex flex-row items-center justify-between py-5 border-b border-slate-100 bg-slate-50/60">
+            <div className="shadow-sm py-2 gap-2.5 rounded-md flex items-center w-2/5 pr-2 pl-2.5 border border-input bg-transparent text-black text-sm">
+              <Search className="w-5 h-5 text-gray-400" />
               <input
                 type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search by name , Ville... "
-                className=" outline-0 text-gray-700 font-medium w-full "
+                className="outline-none text-slate-700 text-sm font-medium w-full  bg-transparent placeholder:text-slate-400"
               />
             </div>
-            <div className=" flex flex-row gap-6 ">
+            <div className="flex flex-row gap-6">
               <button
                 onClick={() => setFilter("All")}
-                className={` cursor-pointer py-2 px-6 rounded-lg text-sm font-medium border-[1.5px] transition-all hover:border-sky-500 ${
-                  filter === "All" && "bg-sky-300 border-none  "
-                } `}
+                className={`flex-1 md:flex-initial cursor-pointer py-2 px-5 rounded-xl text-xs font-semibold tracking-wider uppercase transition-all border ${
+                  filter === "All"
+                    ? "bg-sky-100 text-sky-600 border-sky-200"
+                    : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:border-slate-300"
+                }`}
               >
                 All
               </button>
               <button
                 onClick={() => setFilter("Completed")}
-                className={` cursor-pointer py-2 px-6 rounded-lg text-sm font-medium border-[1.5px] transition-all hover:border-emerald-500 ${
-                  filter === "Completed" && "bg-emerald-300 border-none "
-                } `}
+                className={`flex-1 md:flex-initial cursor-pointer py-2 px-5 rounded-xl text-xs font-semibold tracking-wider uppercase transition-all border ${
+                  filter === "Completed"
+                    ? "bg-emerald-100 text-emerald-600 border-emerald-200"
+                    : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:border-slate-300"
+                }`}
               >
                 Completed
               </button>
               <button
                 onClick={() => setFilter("Pending")}
-                className={` cursor-pointer py-2 px-6 rounded-lg text-sm font-medium border-[1.5px] transition-all hover:border-amber-500 ${
-                  filter === "Pending" && "bg-amber-300 border-none "
-                } `}
+                className={`flex-1 md:flex-initial cursor-pointer py-2 px-5 rounded-xl text-xs font-semibold tracking-wider uppercase transition-all border ${
+                  filter === "Pending"
+                    ? "bg-amber-100 text-amber-600 border-amber-200"
+                    : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:border-slate-300"
+                }`}
               >
                 Pending
               </button>
               <button
                 onClick={() => setFilter("Rejected")}
-                className={` cursor-pointer py-2 px-6 rounded-lg text-sm font-medium border-[1.5px] transition-all hover:border-red-500 ${
-                  filter === "Rejected" && "bg-red-300 border-none "
-                } `}
+                className={`flex-1 md:flex-initial cursor-pointer py-2 px-5 rounded-xl text-xs font-semibold tracking-wider uppercase transition-all border ${
+                  filter === "Rejected"
+                    ? "bg-red-100 text-red-600 border-red-200"
+                    : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:border-slate-300"
+                }`}
               >
                 Rejected
               </button>
             </div>
           </div>
+          <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+            {Orders.filter((item) => {
+              const matchesSearch =
+                item.full_name.toLowerCase().includes(search.toLowerCase()) ||
+                item.ville.toLowerCase().includes(search.toLowerCase());
 
-          <main className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 ">
-            {Orders.map((order, index) => (
+              const matchesFilter =
+                filter === "All" ||
+                (filter === "Completed" && item.status === "Complete") ||
+                item.status === filter;
+
+              return matchesSearch && matchesFilter;
+            }).map((order, index) => (
               <div
                 key={index}
-                className=" bg-white relative rounded-3xl py-3 px-4 border-[2.5px] border-sky-100"
+                className="bg-white relative rounded-3xl py-3 px-4 border-[2.5px] border-sky-100"
               >
-                {viewDetails === false ? (
+                {viewDetails !== order.id ? (
                   <button
-                    onClick={() => setViewDetails(true)}
-                    className=" cursor-pointer absolute top-[-1.5px] right-[-1.5px] rounded-tr-3xl bg-sky-300 px-4 py-3 text-center text-xs font-bold text-gray-900 uppercase transition hover:bg-sky-400"
+                    onClick={() => setViewDetails(order.id)}
+                    className="cursor-pointer absolute top-[-1.5px] right-[-1.5px] rounded-tr-3xl bg-sky-300 px-4 py-3 text-center text-xs font-bold text-gray-900 uppercase transition hover:bg-sky-400"
                   >
                     View details
                   </button>
                 ) : (
                   <button
-                    onClick={() => setViewDetails(false)}
-                    className=" cursor-pointer absolute top-[-1.5px] right-[-1.5px] rounded-tr-3xl bg-sky-300 px-4 py-3 text-center text-xs font-bold text-gray-900 uppercase transition hover:bg-sky-400"
+                    onClick={() => setViewDetails(null)}
+                    className="cursor-pointer absolute top-[-1.5px] right-[-1.5px] rounded-tr-3xl bg-sky-300 px-4 py-3 text-center text-xs font-bold text-gray-900 uppercase transition hover:bg-sky-400"
                   >
                     Retour
                   </button>
                 )}
-                <h2 className=" text-lg mt-2 mb-6 font-semibold">
+
+                <h2 className="text-lg mt-2 mb-6 font-semibold">
                   {order.full_name}
                 </h2>
-                {viewDetails === false ? (
+
+                {viewDetails !== order.id ? (
                   <main>
-                    <div className=" flex items-center gap-3 py-2  ">
+                    <div className="flex items-center gap-3 py-2">
                       <Clock className="w-4 h-4 text-sky-500" />
                       <span className="text-sm font-medium text-slate-700">
                         {order.date} • {order.heure}
                       </span>
                     </div>
-                    <div className=" flex items-center gap-3 py-2  ">
+                    <div className="flex items-center gap-3 py-2">
                       <MapPin className="w-4 h-4 text-emerald-500" />
                       <span className="text-sm font-medium text-slate-700">
                         {order.ville}
                       </span>
                     </div>
-                    <div className=" flex items-center gap-3 py-2  ">
+                    <div className="flex items-center gap-3 py-2">
                       <Layers2 className="w-4 h-4 text-violet-500" />
                       <span className="text-sm font-medium text-slate-700">
                         {order.category}
                       </span>
                     </div>
-                    <div className=" flex items-center gap-3 py-2  ">
+                    <div className="flex items-center gap-3 py-2">
                       <Car className="w-4 h-4 text-orange-500" />
                       <span className="text-sm font-medium text-slate-700">
                         {order.brand}
                       </span>
                     </div>
-                    {/* devider */}
+
+                    {/* divider */}
                     <div className="border-t border-dashed border-gray-300 my-4" />
-                    <div className=" flex flex-row justify-between">
-                      <h2 className=" text-lg font-bold ">Order </h2>
-                      <p className=" text-sky-500 font-semibold ">
+
+                    <div className="flex flex-row justify-between">
+                      <h2 className="text-lg font-bold">Order</h2>
+                      <p className="text-sky-500 font-semibold">
                         {order.service}
                       </p>
                     </div>
+
                     <div className="mt-4 mb-2">
                       {order.status === "Pending" && (
                         <div className="flex items-center justify-between gap-4">
-                          <span className=" animate-pulse bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-sm font-medium">
+                          <span className="animate-pulse bg-amber-100 text-amber-600 px-3 py-1 rounded-full text-sm font-medium">
                             Pending
                           </span>
-
                           <button
                             onClick={() =>
                               handleStatusUpdate(order.id, "Complete")
@@ -196,7 +258,7 @@ const page = () => {
 
                       {order.status === "Complete" && (
                         <div className="flex items-center justify-between">
-                          <span className=" animate-pulse bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">
+                          <span className="animate-pulse bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">
                             Completed
                           </span>
                         </div>
@@ -204,7 +266,7 @@ const page = () => {
 
                       {order.status === "Rejected" && (
                         <div className="flex items-center justify-between">
-                          <span className=" animate-pulse bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
+                          <span className="animate-pulse bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium">
                             Rejected
                           </span>
                         </div>
@@ -222,7 +284,6 @@ const page = () => {
                           >
                             Confirm
                           </button>
-
                           <button
                             onClick={() =>
                               handleStatusUpdate(order.id, "Rejected")
@@ -256,13 +317,16 @@ const page = () => {
                         </span>
                       </div>
                     </div>
-                    {/* devider */}
+
+                    {/* divider */}
                     <div className="border-t border-dashed border-gray-300 my-4" />
-                    <div className=" flex flex-row justify-between">
-                      <h2 className=" text-lg font-bold ">Total</h2>
-                      <p className=" text-emerald-500 font-medium">220 MAD</p>
+
+                    <div className="flex flex-row justify-between">
+                      <h2 className="text-lg font-bold">Total</h2>
+                      <p className="text-emerald-500 font-medium">220 MAD</p>
                     </div>
-                    <button className=" hover:opacity-80 cursor-pointer w-full bg-red-500 mt-4 mb-2 rounded-md py-2 text-white font-medium  ">
+
+                    <button className="hover:opacity-80 cursor-pointer w-full bg-red-500 mt-4 mb-2 rounded-md py-2 text-white font-medium">
                       Remove Demand
                     </button>
                   </main>
@@ -270,7 +334,7 @@ const page = () => {
               </div>
             ))}
           </main>
-        </main>
+        </section>
       </main>
     </section>
   );
