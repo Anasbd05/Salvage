@@ -3,7 +3,7 @@ import { howWorks } from "../assets/assets";
 
 const Howwork = () => {
   return (
-    <section id="how" className="py-6 sm:py-8 md:py-10 lg:py-12 px-3 lg:px-0">
+    <section id="how" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 ">
       <div className="flex flex-col items-center gap-2.5">
         <h1 className="text-4xl font-bold font-montserrat text-accent">
           Comment ça fonctionne

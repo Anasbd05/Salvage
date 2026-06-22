@@ -1,25 +1,34 @@
+import sadie from "./Sadie.png";
+import bono from "./bounou.png";
+import madd from "./Madd.png";
+import jimmy from "./saul.png";
+
 export const reviews = [
   {
     id: 1,
-    username: "sarah_homevibes",
+    image: sadie,
+    username: "Noura Sqali",
     comment:
       "L'équipe a complètement transformé mon espace ! De la consultation initiale à l'installation finale, tout s'est déroulé de manière fluide et professionnelle. J'ai été particulièrement impressionnée par la façon dont ils ont combiné fonctionnalité et esthétique. Mon salon est maintenant chaleureux, moderne et unique.",
   },
   {
     id: 2,
-    username: "modern_mike",
+    username: "Mehdi ribati",
+    image: madd,
     comment:
       "Super satisfait du service de design d'intérieur. Ils ont vraiment écouté ce que je voulais et ont proposé des idées créatives auxquelles je n'aurais pas pensé moi-même. La palette de couleurs et les choix de meubles étaient parfaits. Je profite maintenant de mon chez-moi plus que jamais.",
   },
   {
     id: 3,
-    username: "cozycorner88",
+    username: "Driss El hettab",
+    image: jimmy,
     comment:
       "Je suis impressionné par la façon dont ils ont capté ma vision ! Je voulais une ambiance chaleureuse et cosy avec des éléments naturels, et ils ont absolument réussi. L'attention aux détails était impressionnante, et tout le processus a été collaboratif et agréable.",
   },
   {
     id: 4,
-    username: "neutralqueen",
+    username: "Yassine bounou",
+    image: bono,
     comment:
       "Une excellente expérience du début à la fin. Les designers étaient sympathiques, patients et pleins d'idées fraîches. Ils ont complètement transformé ma chambre en un espace paisible et élégant. C'est maintenant ma pièce préférée de la maison !",
   },
@@ -203,5 +212,72 @@ export const howWorks = [
     title: "Lavage à domicile",
     description:
       "Une fois la réservation confirmée, nous nous déplaçons directement chez vous pour réaliser un lavage complet, professionnel et soigné de votre véhicule.",
+  },
+];
+
+import Audi_A5BF from "./Audi_A5bf.png";
+import Audi_A5 from "./Audi_A5.png";
+import Q8 from "./Q8.png";
+import Q8_bf from "./Q8_bf.png";
+import Audi_RS6 from "./Audi_RS6.png";
+import Audi_RS6bf from "./Audi_RS6bf.png";
+import Audi_interior from "./Audi_interior.png";
+import Audi_interiorBF from "./Audi_interiorBF.png";
+import Dodge_bf from "./Dodge_bf.png";
+import Dodge from "./Dodge_charger.png";
+import Mercedes from "./Mercedes.png";
+import Mercedes_bf from "./Mercedes_bf.png";
+import mercedes_interBF from "./mercedes_interBF.png";
+import Mercedes_interior from "./Mercedes_interior.png";
+import Van1bf from "./Van_1bf.png";
+import Van2bf from "./Van_2bf.png";
+import Van2 from "./Van_2.png";
+import Van1 from "./Van_1.png";
+
+export const workImages = [
+  {
+    before: Audi_A5BF,
+    After: Audi_A5,
+    alt: "Audi A5",
+  },
+  {
+    before: Audi_interiorBF,
+    After: Audi_interior,
+    alt: "Audi_interior",
+  },
+  {
+    before: Audi_RS6bf,
+    After: Audi_RS6,
+    alt: "Audi_RS6",
+  },
+  {
+    before: Q8_bf,
+    After: Q8,
+    alt: "Audi_RS6",
+  },
+  {
+    before: Dodge_bf,
+    After: Dodge,
+    alt: "Audi_RS6",
+  },
+  {
+    before: Mercedes_bf,
+    After: Mercedes,
+    alt: "Audi_RS6",
+  },
+  {
+    before: mercedes_interBF,
+    After: Mercedes_interior,
+    alt: "Audi_RS6",
+  },
+  {
+    before: Van1bf,
+    After: Van1,
+    alt: "Audi_RS6",
+  },
+  {
+    before: Van2bf,
+    After: Van2,
+    alt: "Audi_RS6",
   },
 ];

@@ -6,6 +6,7 @@ import Howwork from "@/components/HowWork";
 import Navbar from "@/components/Navbar";
 import Reviews from "@/components/Reviews";
 import WhyUs from "@/components/WhyUs";
+import Works from "@/components/Works";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Features />
       <WhyUs />
       <Howwork />
+      <Works />
       <Reviews />
       <Faqs />
       <Footer />

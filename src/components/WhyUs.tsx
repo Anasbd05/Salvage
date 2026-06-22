@@ -3,10 +3,7 @@ import SliderUs from "../constent/SliderUs";
 
 const WhyUs = () => {
   return (
-    <section
-      id="services"
-      className="py-10 sm:py-14 md:py-16 px-4 lg:px-0 lg:py-20"
-    >
+    <section id="services" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 ">
       <h1 className="text-4xl font-bold text-center font-montserrat text-accent">
         Pourquoi choisir <span className="text-accent">notre service ?</span>
       </h1>
