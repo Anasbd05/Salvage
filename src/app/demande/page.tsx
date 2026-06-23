@@ -128,7 +128,7 @@ const page = () => {
 
   return (
     <section className="relative min-h-screen bg-linear-to-br from-sky-50 py-10 to-white">
-      <div className="flex flex-row w-full items-center justify-between px-8 py-3 pb-7 border-b  relative">
+      <div className="flex flex-col gap-3 lg:flex-row w-full items-center justify-between px-8 py-3 pb-7 border-b">
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 px-3.5 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 hover:text-gray-800 transition-all"
@@ -136,7 +136,7 @@ const page = () => {
           <ArrowLeft className="w-4 h-4" />
           Retour
         </Link>
-        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
+        <div className=" flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-sky-100 flex items-center justify-center">
             <Car className="w-4 h-4 text-sky-600" />
           </div>
@@ -462,7 +462,7 @@ const page = () => {
         </main>
 
         {/* Sidebar Summary Card */}
-        <div className="w-2/3 lg:w-[45%] lg:sticky lg:top-24">
+        <div className="w-5/6 lg:w-[45%] lg:sticky lg:top-24">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
             <h2 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
               🧾 Récapitulatif

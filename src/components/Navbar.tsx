@@ -22,13 +22,13 @@ const Navbar = () => {
         <div className="hidden md:flex gap-12 items-center">
           <Link
             className="font-semibold cursor-pointer hover:text-neutral-800 "
-            href={"/activite"}
+            href={"#features"}
           >
             Activite
           </Link>
           <Link
             className="font-semibold cursor-pointer hover:text-neutral-800 "
-            href={"#portfolio"}
+            href={"#works"}
           >
             Portfolio
           </Link>
@@ -76,25 +76,31 @@ const Navbar = () => {
               <X size={20} />
             </button>
             <Link
-              href="/"
               onClick={() => setIsMenuOpen(false)}
               className="block font-semibold hover:text-neutral-800"
+              href={"#features"}
             >
-              Home
+              Activite
             </Link>
             <Link
-              href="#categories"
               onClick={() => setIsMenuOpen(false)}
               className="block font-semibold hover:text-neutral-800"
+              href={"#works"}
             >
-              Collections
+              Portfolio
             </Link>
             <Link
-              href="/#contact"
               onClick={() => setIsMenuOpen(false)}
-              className=" py-2 px-4 bg-nature flex justify-center text-white rounded-md hover:opacity-80"
+              className="block font-semibold hover:text-neutral-800"
+              href={"#reviews"}
             >
-              Contact
+              Reviews
+            </Link>
+            <Link
+              href={"/demande"}
+              className=" py-2 px-8 bg-accent text-white hover:opacity-80 cursor-pointer rounded-md "
+            >
+              Demande
             </Link>
           </div>
         </div>

@@ -18,7 +18,7 @@ const Reviews = () => {
         <h1 className="text-4xl font-bold text-center font-montserrat text-accent">
           Clients Reviews
         </h1>
-        <p className="text-gray-600 mb-4 ">
+        <p className="text-gray-600 text-center mb-4 ">
           Apprécié par des centaines de clients pour un lavage à domicile
           rapide, pratique et professionnel.
         </p>
