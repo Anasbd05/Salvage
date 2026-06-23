@@ -20,6 +20,7 @@ interface Order {
   date: string;
   heure: string;
   status: string;
+  total: number;
 }
 
 const page = () => {
@@ -40,12 +41,46 @@ const page = () => {
     }
   };
 
+  const confirmOrder = async (order: Order) => {
+    await fetch("/api/orders/confirm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: order.email,
+        name: order.full_name,
+      }),
+    });
+  };
+
+  const rejectOrder = async (order: Order) => {
+    await fetch("/api/orders/reject", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: order.email,
+        name: order.full_name,
+      }),
+    });
+  };
+
   const handleStatusUpdate = async (id: number, status: string) => {
     setLoading(true);
     const { error } = await supabase
       .from("Salvage")
       .update({ status })
       .eq("id", id);
+
+    FetchOrders();
+    setLoading(false);
+    console.log("error:", error);
+  };
+  const handleDelete = async (id: number) => {
+    setLoading(true);
+    const { error } = await supabase.from("Salvage").delete().eq("id", id);
 
     FetchOrders();
     setLoading(false);
@@ -251,7 +286,7 @@ const page = () => {
                             }
                             className="bg-green-100 text-green-700 px-4 py-2 rounded-md font-medium hover:bg-green-200 transition"
                           >
-                            Mark Complete
+                            {loading === true ? "loading..." : " Mark Complete"}
                           </button>
                         </div>
                       )}
@@ -277,20 +312,23 @@ const page = () => {
                       ) && (
                         <div className="flex gap-4">
                           <button
-                            onClick={() =>
-                              handleStatusUpdate(order.id, "Pending")
-                            }
+                            onClick={async () => {
+                              await handleStatusUpdate(order.id, "Pending");
+                              await confirmOrder(order);
+                            }}
                             className="flex-1 bg-green-100 text-green-700 py-2 rounded-md font-medium hover:bg-green-200 transition"
                           >
-                            Confirm
+                            {loading ? "Loading..." : "Confirm"}
                           </button>
+
                           <button
-                            onClick={() =>
-                              handleStatusUpdate(order.id, "Rejected")
-                            }
+                            onClick={async () => {
+                              await handleStatusUpdate(order.id, "Rejected");
+                              await rejectOrder(order);
+                            }}
                             className="flex-1 bg-red-100 text-red-600 py-2 rounded-md font-medium hover:bg-red-200 transition"
                           >
-                            Reject
+                            {loading ? "Loading..." : "Reject"}
                           </button>
                         </div>
                       )}
@@ -323,11 +361,16 @@ const page = () => {
 
                     <div className="flex flex-row justify-between">
                       <h2 className="text-lg font-bold">Total</h2>
-                      <p className="text-emerald-500 font-medium">220 MAD</p>
+                      <p className="text-emerald-500 font-medium">
+                        {order.total}
+                      </p>
                     </div>
 
-                    <button className="hover:opacity-80 cursor-pointer w-full bg-red-500 mt-4 mb-2 rounded-md py-2 text-white font-medium">
-                      Remove Demand
+                    <button
+                      onClick={() => handleDelete(order.id)}
+                      className="hover:opacity-80 cursor-pointer w-full bg-red-500 mt-4 mb-2 rounded-md py-2 text-white font-medium"
+                    >
+                      {loading === true ? "loading..." : "Remove Demand"}
                     </button>
                   </main>
                 )}

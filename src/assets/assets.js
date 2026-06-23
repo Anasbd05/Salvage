@@ -57,16 +57,11 @@ export const services = [
   },
 ];
 export const vehiculeCategories = [
-  { label: "Citadine (Petite voiture)", name: "Citadine" },
+  { label: "Petite voiture", name: "Citadine" },
   { label: "Berline", name: "Berline" },
-  { label: "SUV / 4x4", name: "Suv_4x4" },
-  { label: "Break", name: "Break" },
-  { label: "Coupé", name: "Coupe" },
-  { label: "Cabriolet", name: "Cabriolet" },
-  { label: "Monospace", name: "Monospace" },
-  { label: "Utilitaire", name: "Utilitaire" },
+  { label: "SUV / 4x4", name: "SUV_4x4" },
+  { label: "Véhicule utilitaire", name: "Utilitaire" },
   { label: "Pick-up", name: "Pickup" },
-  { label: "Luxe", name: "Luxe" },
 ];
 
 export const carBrands = [

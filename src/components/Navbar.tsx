@@ -57,7 +57,7 @@ const Navbar = () => {
         {/* Desktop right section */}
         <div className="hidden md:flex items-center gap-12">
           <Link
-            href={"/#contact"}
+            href={"/demande"}
             className=" py-2 px-5 bg-accent text-white hover:opacity-80 cursor-pointer rounded-md "
           >
             Demande
