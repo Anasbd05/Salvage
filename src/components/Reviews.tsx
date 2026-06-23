@@ -16,7 +16,7 @@ const Reviews = () => {
     <section id="reviews" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 ">
       <div className="flex flex-col items-center gap-1">
         <h1 className="text-4xl font-bold text-center font-montserrat text-accent">
-          Clients Reviews
+          Avis clients
         </h1>
         <p className="text-gray-600 text-center mb-4 ">
           Apprécié par des centaines de clients pour un lavage à domicile

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import hero from "@/assets/hero.png";
+import Link from "next/link";
 
 const Home = () => {
   return (
@@ -20,12 +21,15 @@ const Home = () => {
         </p>
 
         <div className="flex gap-4 pt-2">
-          <button className="group flex items-center gap-2 px-8 py-4 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-semibold shadow-lg shadow-sky-200 transition-all duration-300">
+          <Link
+            href="/demande"
+            className=" cursor-pointer group flex items-center gap-2 px-8 py-4 rounded-xl bg-primary hover:opacity-80 text-white font-semibold shadow-lg shadow-sky-200 transition-all duration-300"
+          >
             Réserver maintenant
             <span className="transition-transform group-hover:translate-x-1">
               →
             </span>
-          </button>
+          </Link>
         </div>
       </div>
       <div className="  w-full lg:w-2/5">

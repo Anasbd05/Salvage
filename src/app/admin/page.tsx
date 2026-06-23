@@ -145,8 +145,8 @@ const page = () => {
         </main>
 
         {/* table */}
-        <section className="rounded-2xl border border-slate-200 bg-white pb-8 px-8 mt-10 shadow-sm overflow-hidden">
-          <div className="flex flex-row items-center justify-between py-5 border-b border-slate-100 bg-slate-50/60">
+        <section className="rounded-2xl border border-slate-200 bg-white pb-8  mt-10 shadow-sm overflow-hidden">
+          <div className="flex flex-row items-center justify-between w-full py-5 border-b border-slate-100 bg-slate-50 px-8 ">
             <div className="shadow-sm py-2 gap-2.5 rounded-md flex items-center w-2/5 pr-2 pl-2.5 border border-input bg-transparent text-black text-sm">
               <Search className="w-5 h-5 text-gray-400" />
               <input
@@ -200,7 +200,7 @@ const page = () => {
               </button>
             </div>
           </div>
-          <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+          <main className="grid grid-cols-1 px-8 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
             {Orders.filter((item) => {
               const matchesSearch =
                 item.full_name.toLowerCase().includes(search.toLowerCase()) ||

@@ -94,13 +94,13 @@ const Navbar = () => {
               className="block font-semibold hover:text-neutral-800"
               href={"#reviews"}
             >
-              Reviews
+              Avis
             </Link>
             <Link
               href={"/demande"}
               className=" py-2 px-8 bg-accent text-white hover:opacity-80 cursor-pointer rounded-md "
             >
-              Demande
+              Réserver
             </Link>
           </div>
         </div>
